@@ -1,13 +1,14 @@
-function circle (circleColor: number, milliseconds: number) {
-    for (let led3 = 0; led3 <= 59; led3++) {
+function circle(circleColor: number, milliseconds: number) {
+    for (let led3 = 0; led3 < 60; led3++) {
         haloDisplay.setZipLedColor(led3, circleColor)
         haloDisplay.show()
         basic.pause(milliseconds)
         haloDisplay.setZipLedColor(led3, kitronik_halo_hd.colors(ZipLedColors.Black))
     }
 }
-let haloDisplay: kitronik_halo_hd.ZIPHaloHd = null
-let colors: number[] = []
+
+let haloDisplay : kitronik_halo_hd.ZIPHaloHd = null
+let colors : number[] = []
 colors.push(kitronik_halo_hd.colors(ZipLedColors.Red))
 colors.push(kitronik_halo_hd.colors(ZipLedColors.Orange))
 colors.push(kitronik_halo_hd.colors(ZipLedColors.Yellow))
