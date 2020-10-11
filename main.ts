@@ -1,32 +1,37 @@
-function circle (circleColor: number, milliseconds: number) {
-    for (let led3 = 0; led3 <= 59; led3++) {
+function circle(circleColor: number, milliseconds: number) {
+    for (let led3 = 0; led3 < 60; led3++) {
         haloDisplay.setZipLedColor(led3, circleColor)
         haloDisplay.show()
         basic.pause(milliseconds)
         haloDisplay.setZipLedColor(led3, kitronik_halo_hd.colors(ZipLedColors.Black))
     }
 }
-// Press button A to decrease the brightness of the LED
-input.onButtonPressed(Button.A, function () {
+
+//  Press button A to decrease the brightness of the LED
+input.onButtonPressed(Button.A, function on_button_pressed_a() {
+    
     if (brightness > 0) {
         brightness += -1
         haloDisplay.setBrightness(brightness)
     }
+    
 })
-// Press button B to increase the brightness of the LED
-input.onButtonPressed(Button.AB, function () {
+//  Press button B to increase the brightness of the LED
+input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
     basic.showString("Brightness:")
     basic.showNumber(brightness)
 })
-// Press button B to increase the brightness of the LED
-input.onButtonPressed(Button.B, function () {
+//  Press button B to increase the brightness of the LED
+input.onButtonPressed(Button.B, function on_button_pressed_b() {
+    
     if (brightness < 255) {
         brightness += 1
         haloDisplay.setBrightness(brightness)
     }
+    
 })
-let haloDisplay: kitronik_halo_hd.ZIPHaloHd = null
-let colors: number[] = []
+let haloDisplay : kitronik_halo_hd.ZIPHaloHd = null
+let colors : number[] = []
 let brightness = 0
 let led2 = 0
 brightness = 128

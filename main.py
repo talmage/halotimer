@@ -4,8 +4,36 @@ def circle(circleColor: number, milliseconds: number):
         haloDisplay.show()
         basic.pause(milliseconds)
         haloDisplay.set_zip_led_color(led3, kitronik_halo_hd.colors(ZipLedColors.BLACK))
+# Press button A to decrease the brightness of the LED
+
+def on_button_pressed_a():
+    global brightness
+    if brightness > 0:
+        brightness += -1
+        haloDisplay.set_brightness(brightness)
+input.on_button_pressed(Button.A, on_button_pressed_a)
+
+# Press button B to increase the brightness of the LED
+
+def on_button_pressed_ab():
+    basic.show_string("Brightness:")
+    basic.show_number(brightness)
+input.on_button_pressed(Button.AB, on_button_pressed_ab)
+
+# Press button B to increase the brightness of the LED
+
+def on_button_pressed_b():
+    global brightness
+    if brightness < 255:
+        brightness += 1
+        haloDisplay.set_brightness(brightness)
+input.on_button_pressed(Button.B, on_button_pressed_b)
+
 haloDisplay: kitronik_halo_hd.ZIPHaloHd = None
 colors: List[number] = []
+brightness = 0
+led2 = 0
+brightness = 128
 colors.append(kitronik_halo_hd.colors(ZipLedColors.RED))
 colors.append(kitronik_halo_hd.colors(ZipLedColors.ORANGE))
 colors.append(kitronik_halo_hd.colors(ZipLedColors.YELLOW))
@@ -16,8 +44,7 @@ colors.append(kitronik_halo_hd.colors(ZipLedColors.VIOLET))
 colors.append(kitronik_halo_hd.colors(ZipLedColors.PURPLE))
 colors.append(kitronik_halo_hd.colors(ZipLedColors.WHITE))
 haloDisplay = kitronik_halo_hd.create_zip_halo_display(60)
-led2 = 0
-haloDisplay.set_brightness(111)
+haloDisplay.set_brightness(brightness)
 haloDisplay.clear()
 while True:
     for color in colors:
