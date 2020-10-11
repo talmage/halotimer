@@ -10,6 +10,7 @@ function circle (circleColor: number, milliseconds: number) {
 input.onButtonPressed(Button.A, function () {
     if (brightness > 0) {
         brightness += -1
+        haloDisplay.setBrightness(brightness)
     }
 })
 // Press button B to increase the brightness of the LED
@@ -21,6 +22,7 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     if (brightness < 255) {
         brightness += 1
+        haloDisplay.setBrightness(brightness)
     }
 })
 let haloDisplay: kitronik_halo_hd.ZIPHaloHd = null
