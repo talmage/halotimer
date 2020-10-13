@@ -30,6 +30,14 @@ input.onButtonPressed(Button.B, function on_button_pressed_b() {
     }
     
 })
+input.onGesture(Gesture.Shake, function on_gesture_shake() {
+    basic.showString("Hey!")
+})
+//  On the shake event, display the elapsed time in minutes.
+control.onEvent(EventBusSource.MICROBIT_ID_GESTURE, EventBusValue.MES_DEVICE_GESTURE_DEVICE_SHAKEN, function on_microbit_id_gesture_mes_device_shaken() {
+    basic.showNumber(minutes)
+})
+let minutes = 0
 let haloDisplay : kitronik_halo_hd.ZIPHaloHd = null
 let colors : number[] = []
 let brightness = 0
@@ -45,10 +53,14 @@ colors.push(kitronik_halo_hd.colors(ZipLedColors.Violet))
 colors.push(kitronik_halo_hd.colors(ZipLedColors.Purple))
 colors.push(kitronik_halo_hd.colors(ZipLedColors.White))
 haloDisplay = kitronik_halo_hd.createZIPHaloDisplay(60)
+minutes = 0
 haloDisplay.setBrightness(brightness)
 haloDisplay.clear()
 while (true) {
     for (let color of colors) {
         circle(color, 1000)
+        minutes += 1
+        //  Simulate the shake event so that the micro:bit displays the elapsed time in minutes.
+        control.raiseEvent(EventBusSource.MICROBIT_ID_GESTURE, EventBusValue.MES_DEVICE_GESTURE_DEVICE_SHAKEN)
     }
 }
